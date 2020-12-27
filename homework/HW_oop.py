@@ -53,4 +53,3 @@ class Snake(Animal):
 # snake = Snake('Kaa', '100', '120')
 # snake.about_animals()
 # snake.neutral()
-
