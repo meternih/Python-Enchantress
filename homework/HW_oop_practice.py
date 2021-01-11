@@ -28,16 +28,19 @@ class Person(Human):
 
     def about_yourself(self):
         """створюємо метод інформація про себе"""
-        print(f"My name {self.name}. I am {self.age} years old. I have {self.money} euros. I dont have my own house - {self.home}")
+        print(
+            f"My name {self.name}. I am {self.age} years old. I have {self.money} euros. I dont have my own house - {self.home}")
 
-    def Make_money(self):
+    def make_money(self):
         """створюєм метод заробити гроші"""
         self.money += 2500
         print(f"{self.name} worked all week. Erned 2500 euros. at the moment I have {self.money}.")
 
     def to_buy_a_house(self):
         """створюєм метод придбати будинок"""
-        pass
+        if self.home is False and self.money >= 2000:
+            self.home = True
+        print(f'I have a house - {self.home}')
 
 class House():
     """створюєм будинок"""
@@ -80,4 +83,3 @@ class Realtor(metaclass=SingeltonMetaClass):
     def realtor_steals_money(self):
         """створюємо метод крадіжки грошей"""
         pass
-
