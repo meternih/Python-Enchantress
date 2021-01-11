@@ -9,7 +9,7 @@ class Human(ABC):
         raise NotImplementedError('summer. nothing happens. its from a board game of thrones')
 
     @abstractmethod
-    def Make_money(self):
+    def make_money(self):
         raise NotImplementedError('summer. nothing happens. its from a board game of thrones')
 
     @abstractmethod
