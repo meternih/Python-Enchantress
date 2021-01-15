@@ -19,6 +19,7 @@ class Human(ABC):
 
 class Person(Human):
     """створюєм клас персона наслідуючись від класу людина"""
+
     def __init__(self, name, age, money, home):
         """ініціалізація атрибутів персони"""
         self.name = name
@@ -40,18 +41,40 @@ class Person(Human):
         """створюєм метод придбати будинок"""
         if self.home is False and self.money >= 2000:
             self.home = True
-        print(f'I have a house - {self.home}')
+        print(f"I have a house - {self.home}")
 
-class House():
+
+class House(ABC):
     """створюєм будинок"""
+
     def __init__(self, area, cost):
         """ініціалізуємо атрибути будинку"""
         self.area = area
         self.cost = cost
 
+    @abstractmethod
     def discount(self):
-        """створюємо метод 15 відсоткової знижки"""
-        pass
+        raise NotImplementedError
+
+
+class Home(House):
+    """Створюєм клас дім наслідуючи клас будинок"""
+
+    def __init__(self, area, cost):
+        """застосовуємо властивості будинку"""
+        super(Home, self).__init__(area, cost)
+        self.cost = cost
+
+    def discount(self):
+        print("\nDream house ")
+        if self.cost >= 3000 and self.area >= 42:
+            self.discounted = self.cost * 0.92
+            print(f"your discount on this house {self.discounted}. ")
+        elif self.cost >= 4000 and self.area >= 50:
+            self.discounted = self.cost * 0.95
+            print(f"your discount on this house {self.discounted}. ")
+        else:
+            print(f"no discount")
 
 
 class SingeltonMetaClass(type):
@@ -64,8 +87,10 @@ class SingeltonMetaClass(type):
             cls._instances[cls] = instance
         return cls._instances[cls]
 
+
 class Realtor(metaclass=SingeltonMetaClass):
     """створюєм основний клас на базі метакласу """
+
     def __init__(self, name, houses, discount):
         """ініціюємо атрибути ріелтора"""
         self.name = name
@@ -74,11 +99,21 @@ class Realtor(metaclass=SingeltonMetaClass):
 
     def about_all_the_Houses(self):
         """створюємо метод який надає інформацію про будинки"""
-        pass
+        self.houses = [
+            {"cost": 4500, "area": 42},
+            {"cost": 5000, "area": 48}
+        ]
+        print("Now on sale: ")
+        for house in self.houses:
+            print(f"House with area {house['area']}  is for sale now for {house['cost']} ")
 
     def realtor_gives_a_discount(self):
         """створюємо метод надання знижки"""
-        pass
+        for house in self.houses:
+            if house["area"] <= 42:
+                self.discount = 300
+            else:
+                self.discount = 500
 
     def realtor_steals_money(self):
         """створюємо метод крадіжки грошей"""
