@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import random
 
 
 class Human(ABC):
@@ -30,12 +31,13 @@ class Person(Human):
     def about_yourself(self):
         """створюємо метод інформація про себе"""
         print(
-            f"My name {self.name}. I am {self.age} years old. I have {self.money} euros. I dont have my own house - {self.home}")
+            f"My name {self.name}. I am {self.age} years old. I have {self.money} euros. I have my own house -\
+            {self.home}")
 
     def make_money(self):
         """створюєм метод заробити гроші"""
         self.money += 2500
-        print(f"{self.name} worked all week. Erned 2500 euros. at the moment I have {self.money}.")
+        print(f"{self.name} worked all week.  2500 euros. at the moment I have {self.money}.")
 
     def to_buy_a_house(self):
         """створюєм метод придбати будинок"""
@@ -60,10 +62,11 @@ class House(ABC):
 class Home(House):
     """Створюєм клас дім наслідуючи клас будинок"""
 
-    def __init__(self, area, cost):
+    def __init__(self, area, cost, discounted):
         """застосовуємо властивості будинку"""
         super(Home, self).__init__(area, cost)
         self.cost = cost
+        self.discounted = discounted
 
     def discount(self):
         print("\nDream house ")
@@ -77,7 +80,7 @@ class Home(House):
             print(f"no discount")
 
 
-class SingeltonMetaClass(type):
+class RealtorMetaClass(type):
     """створюєм метаклас для класу сінгелтон ріелтер """
     _instances = {}
 
@@ -88,7 +91,7 @@ class SingeltonMetaClass(type):
         return cls._instances[cls]
 
 
-class Realtor(metaclass=SingeltonMetaClass):
+class Realtor(metaclass=RealtorMetaClass):
     """створюєм основний клас на базі метакласу """
 
     def __init__(self, name, houses, discount):
@@ -97,7 +100,7 @@ class Realtor(metaclass=SingeltonMetaClass):
         self.houses = houses
         self.discount = discount
 
-    def about_all_the_Houses(self):
+    def about_all_the_houses(self):
         """створюємо метод який надає інформацію про будинки"""
         self.houses = [
             {"cost": 4500, "area": 42},
@@ -115,6 +118,11 @@ class Realtor(metaclass=SingeltonMetaClass):
             else:
                 self.discount = 500
 
+    @staticmethod
     def realtor_steals_money(self):
         """створюємо метод крадіжки грошей"""
-        pass
+        steal = random.randit(0, 9)
+        if steal == 9:
+            print(f"Your money has been stolen! Contact the police!")
+        else:
+            print(f"your money you have!")
