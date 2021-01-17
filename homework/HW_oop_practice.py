@@ -119,7 +119,7 @@ class Realtor(metaclass=RealtorMetaClass):
                 self.discount = 500
 
     @staticmethod
-    def realtor_steals_money(self):
+    def realtor_steals_money():
         """створюємо метод крадіжки грошей"""
         steal = random.randit(0, 9)
         if steal == 9:
